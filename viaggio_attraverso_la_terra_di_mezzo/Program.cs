@@ -42,10 +42,12 @@
         }
         static void Main(string[] args)
         {
-            int vita = 10, scelta = 0;
+            int vita = 10, scelta = 0, avanzamento, indice = 0 ;
             string personaggio = "";
 
             string[] Luogo = { "La Contea", "Bosco Atro", "Casa di Tom Bombadil", "Brea", "Colle Vento", "Gran Burrone", "Moria", "Lothlórien", "Fiume Anduin", "Amon Hen", "Fangorn", "Rohan", "Fosso di Helm", "Isengard", "Osgiliath", "Minas Morgul", "Minas Tirith", "Campi del Pelennor", "Cirith Ungol", "Monte Fato" };
+
+            string[] inventario = { "x", "x", "x", "x", "x" };
 
             personaggio = SceltaPersonaggio(personaggio);
 
@@ -53,7 +55,7 @@
 
             if (personaggio == "Frodo")
             {
-                vita = vita + 1;
+                vita = vita + 5;
             }
 
             Console.WriteLine();
@@ -72,7 +74,34 @@
 
                 if (scelta == 1 )
                 {
-                    Console.WriteLine("Avanzi di " + LancioDado() + " caselle");
+                    avanzamento = LancioDado();
+
+                    Console.WriteLine("Avanzi di " + avanzamento + " caselle");
+
+                    indice = indice + avanzamento;
+
+                    Console.WriteLine();
+
+                    Console.WriteLine("Sei riuscito ad avanzare fino a " + Luogo[indice]);
+
+                }else if(scelta == 2)
+                {
+                    Console.WriteLine("Vita: " + vita);
+
+                }else if(scelta == 3)
+                {
+                    for(int i = 0; i < inventario.Length; i++)
+                    {
+                        Console.Write("[" + inventario[i] + "]"); 
+                    }
+
+                }else if(scelta == 4)
+                {
+
+                }else if(scelta == 5)
+                {
+                    vita = 0;
+                    Console.WriteLine("Sei uscito dal gioco");
                 }
             }
 
