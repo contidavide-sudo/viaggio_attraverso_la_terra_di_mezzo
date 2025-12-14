@@ -52,18 +52,56 @@
         static int Combattimento(int puntiVita, int dannoBase, string[] inv)
         {
             int vitaNem = 8;
+            string sceltaArma;
 
-            while (vitaNem > 0 || puntiVita > 0)
+            while (vitaNem > 0 && puntiVita > 0)
             {
                 Console.WriteLine("Cosa vuoi utilizzare per combattere?");
 
                 for (int i = 0; i < inv.Length; i++) {
 
-                    Console.WriteLine("[" + inv[i] + "]");
-                
+                    Console.Write("[" + inv[i] + "]" + "[ mani nude ]" );
+
                 }
+
+                sceltaArma = Console.ReadLine();
+
+                int danno=dannoBase;
+
+                if(sceltaArma == "Spada")
+                {
+                    danno = danno + 1;
+
+                    vitaNem = vitaNem - dannoBase;
+                }
+                else if(sceltaArma == "Bacchetta magica")
+                {
+                    danno = danno + 2;
+
+                    vitaNem = vitaNem - dannoBase;
+                }
+                else if (sceltaArma == "Pozione del fuoco")
+                {
+                    danno=danno + 3;
+
+                    vitaNem = vitaNem - dannoBase;
+                }
+                else if(sceltaArma == "Pozione della morte")
+                {
+                    danno = vitaNem;
+
+                    vitaNem = vitaNem - dannoBase;
+                }
+                else if(sceltaArma=="Mani nude")
+                {
+                    vitaNem = vitaNem - danno;
+                }
+
+                puntiVita = puntiVita - 2;
               
             }        
+
+            return puntiVita;
         }
         static void Main(string[] args)
         {
@@ -124,6 +162,12 @@
                         if(sceltaNem == 1)
                         {
 
+                            Combattimento(vita, danno, inventario);
+
+                        }
+                        else if(sceltaNem == 2)
+                        {
+
                         }
 
 
@@ -138,21 +182,25 @@
                         Console.WriteLine("Hai trovato un oggetto");
                     }
 
-                }else if(scelta == 2)
+                }
+                else if(scelta == 2)
                 {
                     Console.WriteLine("Vita: " + vita);
 
-                }else if(scelta == 3)
+                }
+                else if(scelta == 3)
                 {
                     for(int i = 0; i < inventario.Length; i++)
                     {
                         Console.Write("[" + inventario[i] + "]"); 
                     }
 
-                }else if(scelta == 4)
+                }
+                else if(scelta == 4)
                 {
 
-                }else if(scelta == 5)
+                }
+                else if(scelta == 5)
                 {
                     vita = 0;
                     Console.WriteLine("Sei uscito dal gioco");
