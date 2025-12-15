@@ -52,47 +52,51 @@
         static int Combattimento(int puntiVita, int dannoBase, string[] inv)
         {
             int vitaNem = 8;
-            string sceltaArma;
+            int sceltaArma;
 
             while (vitaNem > 0 && puntiVita > 0)
-            {
-                Console.WriteLine("Cosa vuoi utilizzare per combattere?");
+            {                
+                do
+                {
+                    Console.WriteLine("Cosa vuoi utilizzare per combattere?");
 
-                for (int i = 0; i < inv.Length; i++) {
+                    for (int i = 0; i < inv.Length; i++)
+                    {
 
-                    Console.Write("[" + inv[i] + "]" + "[ mani nude ]" );
+                        Console.Write("[" + i + ")" + inv[i] + "]" + "[ mani nude ]");
 
-                }
+                    }
+                    sceltaArma = Convert.ToInt32(Console.ReadLine());
 
-                sceltaArma = Console.ReadLine();
+                } while (sceltaArma >= inv.Length);
 
-                int danno=dannoBase;
+                int danno = dannoBase;
 
-                if(sceltaArma == "Spada")
+                if(sceltaArma == 1)
                 {
                     danno = danno + 1;
 
                     vitaNem = vitaNem - dannoBase;
                 }
-                else if(sceltaArma == "Bacchetta magica")
+                else if(sceltaArma == 2)
                 {
                     danno = danno + 2;
 
                     vitaNem = vitaNem - dannoBase;
                 }
-                else if (sceltaArma == "Pozione del fuoco")
+                else if (sceltaArma == 3)
                 {
-                    danno=danno + 3;
+                    danno = danno + 3;
 
                     vitaNem = vitaNem - dannoBase;
                 }
-                else if(sceltaArma == "Pozione della morte")
+                else if(sceltaArma == 4)
                 {
                     danno = vitaNem;
 
                     vitaNem = vitaNem - dannoBase;
                 }
-                else if(sceltaArma=="Mani nude")
+                else if(sceltaArma == 5)
                 {
                     vitaNem = vitaNem - danno;
                 }
@@ -103,6 +107,22 @@
 
             return puntiVita;
         }
+
+        static int Fuga(string pers)
+        {
+
+            Random lancio = new Random();
+            if (pers == "Merry")
+            {
+                return lancio.Next(1, 11) + 1;
+            }
+            else
+            {
+                return lancio.Next(1, 11);
+            }
+
+        }
+
         static void Main(string[] args)
         {
             int vita = 10, danno = 2, scelta = 0, avanzamento, indice = 0, evento, sceltaNem;
@@ -164,28 +184,37 @@
 
                             Combattimento(vita, danno, inventario);
 
+                            if (vita <= 0)
+                            {
+                                Console.WriteLine("GAME OVER!!!");
+                                Console.WriteLine("sei stato ucciso da un Nazgul");
+                            }
+                            else
+                            {
+                                Console.WriteLine("Hai vinto il combattimento");
+                            }
+
                         }
                         else if(sceltaNem == 2)
                         {
-
+                            Fuga(personaggio);
                         }
-
-
 
                     }
                     else if(evento == 2)
                     {
-                        Console.WriteLine("Durante il tuo viaggio hai incontrato ");
+                        Console.WriteLine("Durante il tuo viaggio hai incontrato ");//finire
                     } 
                     else
                     {
-                        Console.WriteLine("Hai trovato un oggetto");
+                        Console.WriteLine("Hai trovato un oggetto");//finire
                     }
 
                 }
                 else if(scelta == 2)
                 {
                     Console.WriteLine("Vita: " + vita);
+                    Console.WriteLine("Danno: " + danno);
 
                 }
                 else if(scelta == 3)
@@ -196,7 +225,7 @@
                     }
 
                 }
-                else if(scelta == 4)
+                else if(scelta == 4)//finire
                 {
 
                 }
